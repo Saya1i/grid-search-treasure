@@ -160,6 +160,9 @@ In this problem:
 
 ---
 
+▶️ How to Run
+python search.py
+
 
 
 
