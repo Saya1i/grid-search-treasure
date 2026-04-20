@@ -1,56 +1,167 @@
-# Grid Search: Finding Treasure
+#  Treasure Search in Grid — Strategy, Reasoning & Tradeoffs
 
-## Problem
+## Problem Statement
 
-A robot starts at (0,0) in an n x n grid and must find a treasure.
-It can move to neighboring cells and only knows its current position.
+We are given an **n × n grid** where one cell contains a hidden treasure.
+A robot starts at position **(0, 0)** and can move to adjacent cells (up, down, left, right).
 
----
+The robot:
 
-## Approach
-
-I started with **Breadth-First Search (BFS)**, which guarantees the shortest path when all moves have equal cost.
-
-However, BFS explores the grid uniformly and does not account for different movement costs.
-
-To improve this, I implemented **A*** search, which uses a heuristic (distance to the goal) to guide the search more efficiently.
+* Has **no prior knowledge** of the treasure location
+* Only observes its **current cell**
+* Must explore the grid to find the treasure
 
 ---
 
-## Trade-offs
+## 🧠 Thought Process & Approach Evolution
 
-* **BFS**
+### 1️⃣ Initial Idea: Explore Without Knowledge
 
-  * Guarantees shortest path
-  * Explores many unnecessary cells
-  * Higher memory usage
+Since the robot has **no information about the goal**, the problem becomes a **blind search problem**.
 
-* **A***
+This led to the question:
+Thought Approach:-
+It can go up,down,left and right
+And second thing it may or may not go diagonally
 
-  * Faster and more efficient
-  * Uses heuristic to guide search
-  * Slightly more complex
-
----
-
-## Extensions
-
-* Added **diagonal movement**
-* Implemented **A*** for weighted paths
-* Added **path reconstruction** (like GPS route)
+> *How do we explore efficiently when we don’t know where to go?*
 
 ---
 
-## How to Run
+### 2️⃣ Random Walk (Baseline)
 
-Run the following:
+First approach:
 
-```bash
-python search.py
-```
+* Move randomly until the treasure is found
+
+#### Observation:
+
+* Very simple
+* But highly inefficient and unpredictable
+
+👉 Helped establish a **baseline for comparison**
 
 ---
 
-## Key Insight
+### 3️⃣ DFS (Depth-First Search)
 
-BFS works well for simple cases, but when movement costs differ or efficiency is important, A* provides a better solution by combining cost and goal direction.
+Next, I considered DFS:
+
+* Explore deeply in one direction, then backtrack
+
+#### Observation:
+
+* Uses less memory
+* But may take a **very long path**
+
+👉 Not suitable when we want efficiency
+
+---
+
+### 4️⃣ BFS (Final Choice ✅)
+
+Then I moved to BFS:
+
+* Explore level-by-level from the starting point
+
+#### Key Insight:
+
+> When no direction or goal information is available, exploration should be **uniform in all directions**.
+
+#### Why BFS is ideal:
+
+* Guarantees **minimum number of steps**
+* Systematic exploration
+* No bias toward any direction
+
+👉 BFS is the **most appropriate strategy for blind search**
+
+---
+
+### 5️⃣ Considering A* (Important Insight)
+
+At this stage, I explored whether **A*** could improve performance.
+
+A* works using:
+
+* Cost so far + estimated distance to goal (heuristic)
+
+#### Key Issue:
+
+* The robot has **no knowledge of the treasure location**
+* So it cannot estimate distance to the goal
+
+👉 No heuristic can be defined
+
+#### Conclusion:
+
+> Without a heuristic, A* reduces to BFS and provides no advantage.
+
+---
+
+### 6️⃣ Relation to Dijkstra’s Algorithm
+
+While analyzing A*, I observed:
+
+* A* with **no heuristic (h = 0)** → becomes **Dijkstra’s Algorithm**
+* In a grid with equal movement cost → Dijkstra behaves like **BFS**
+
+#### Insight:
+
+> BFS, Dijkstra, and A* are closely related, but differ based on available information.
+
+---
+
+## ⚖️ Tradeoffs & Complexity
+
+### 🔁 Strategy Comparison
+
+| Strategy    | Idea              | Time Complexity | Space  | Optimal | Key Insight           |
+| ----------- | ----------------- | --------------- | ------ | ------- | --------------------- |
+| Random Walk | Random movement   | Unbounded       | Low    | ❌       | Unreliable            |
+| DFS         | Go deep first     | O(n²)           | O(n)   | ❌       | May take long paths   |
+| BFS         | Level-wise search | O(n²)           | O(n²)  | ✅       | Best for blind search |
+| Dijkstra    | Weighted BFS      | O(n² log n)     | High   | ✅       | Unnecessary here      |
+| A*          | Heuristic search  | Depends         | Medium | ✅       | Needs goal knowledge  |
+
+---
+
+## 🚫 Why BFS over A*
+
+> A* is often considered more efficient than BFS, but only when a **meaningful heuristic** is available.
+
+In this problem:
+
+* The goal location is **completely unknown**
+* No heuristic can guide the search
+
+👉 Therefore:
+
+* A* behaves exactly like BFS
+* Adds complexity without improving performance
+
+---
+
+## 💡 Key Insight
+
+> In a completely unknown environment, **systematic exploration (BFS)** is optimal.
+> Intelligent search methods like A* require prior knowledge, which is absent here.
+
+---
+
+## ⚙️ Implementation Summary
+
+* Implemented BFS using a queue
+* Tracked visited cells to avoid revisits
+* Returned:
+
+  * Treasure location
+  * Number of steps taken
+
+---
+
+
+
+
+
+
