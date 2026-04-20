@@ -13,7 +13,7 @@ The robot:
 
 ---
 
-## 🧠 Thought Process & Approach Evolution
+##  Thought Process & Approach Evolution
 
 ### 1️⃣ Initial Idea: Explore Without Knowledge
 
@@ -160,7 +160,7 @@ In this problem:
   * Number of steps taken
 
 ---
-## 🧩 Example Grid
+##  Example Grid
 
 ```text
 S 0 0 0
@@ -174,6 +174,7 @@ S 0 0 0
 - 0 → Free cell
 
 ▶️ How to Run
+
 python search.py
 
 
