@@ -93,11 +93,12 @@ A* works using:
 
 👉 No heuristic can be defined
 
+#### Note:
+In implementation, the treasure location is first identified in the grid so that A* can be demonstrated and compared with BFS.
+
 #### Conclusion:
 
 > Without a heuristic, A* reduces to BFS and provides no advantage.
-
----
 
 ### 6️⃣ Relation to Dijkstra’s Algorithm
 
@@ -159,6 +160,18 @@ In this problem:
   * Number of steps taken
 
 ---
+## 🧩 Example Grid
+
+```text
+S 0 0 0
+0 X 0 0
+0 0 0 T
+0 X 0 0
+```
+- S → Start (0,0)
+- T → Treasure
+- X → Obstacle
+- 0 → Free cell
 
 ▶️ How to Run
 python search.py
