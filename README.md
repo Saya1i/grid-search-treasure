@@ -113,9 +113,9 @@ While analyzing A*, I observed:
 
 ---
 
-## ⚖️ Tradeoffs & Complexity
+##  Tradeoffs & Complexity
 
-### 🔁 Strategy Comparison
+###  Strategy Comparison
 
 | Strategy    | Idea              | Time Complexity | Space  | Optimal | Key Insight           |
 | ----------- | ----------------- | --------------- | ------ | ------- | --------------------- |
@@ -127,7 +127,7 @@ While analyzing A*, I observed:
 
 ---
 
-## 🚫 Why BFS over A*
+##  Why BFS over A*
 
 > A* is often considered more efficient than BFS, but only when a **meaningful heuristic** is available.
 
@@ -136,14 +136,14 @@ In this problem:
 * The goal location is **completely unknown**
 * No heuristic can guide the search
 
-👉 Therefore:
+ Therefore:
 
 * A* behaves exactly like BFS
 * Adds complexity without improving performance
 
 ---
 
-## 💡 Key Insight
+##  Key Insight
 
 > In a completely unknown environment, **systematic exploration (BFS)** is optimal.
 > Intelligent search methods like A* require prior knowledge, which is absent here.
